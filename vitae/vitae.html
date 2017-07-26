@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>前端开发简历</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="author" content="Alvaro Trigo Lopez"/>
+    <meta name="description" content="fullPage full-screen backgrounds."/>
+    <meta name="keywords" content="fullpage,jquery,demo,screen,fullscreen,backgrounds,full-screen"/>
+    <meta name="Resource-type" content="Document"/>
+    <link rel="shortcut icon" type="image/ico" href="imgs/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery.fullPage.css"/>
+    <link rel="stylesheet" type="text/css" href="vitae.css"/>
+
+    <!--[if IE]>
+    <script type="text/javascript">
+        var console = {
+            log: function () {
+            }
+        };
+    </script>
+    <![endif]-->
+
+    <script src="http://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/jqueryui/1.8.13/jquery.ui.widget.min.js"></script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/jquery.fullPage.js"></script>
+    <script type="text/javascript" src="js/scrolloverflow.js"></script>
+    <script type="text/javascript" src="js/jquery.rotate.min.js"></script>
+
+</head>
+<body>
+
+<div id="fullpage">
+    <div class="section " id="section0">
+        <video id="myVideo" loop muted data-autoplay>
+            <source src="imgs/flowers.mp4" type="video/mp4">
+            <source src="imgs/flowers.webm" type="video/webm">
+        </video>
+        <div class="layer">
+            <div class="image">
+                <img class="img11" src="imgs/one.jpg" style="display: block">
+                <img class="imaget" src="imgs/mexiao.JPG">
+            </div>
+            <p class="word">用一双一像素的眼睛看世界</p>
+            <span class="line"></span>
+            <p class="wordP" style="margin-top:45px ">Holle World，我叫陈文博</p>
+            <p class="wordP">26岁</p>
+            <p class="wordP">一名前端开发工程师</p>
+            <p class="wordP">15079016507@163.com</p>
+        </div>
+    </div>
+    <div class="section" id="section2">
+        <div style="float:right;" id="hub_iframe"></div>
+        <h1 class="titleWord">关于我 </h1>
+        <div class="about">
+            <ul>
+                <li class="Education">
+                    <img src="imgs/Education.png" style="display: none">
+                    <img src="imgs/Education1.png">
+                    <h4 class="liWorld1">学历/本科</h4>
+
+                </li>
+                <li class="experience">
+                    <img src="imgs/experience.png" style="display: none">
+                    <img src="imgs/experience1.png">
+                    <h4 class="liWorld2">经验/1.5年</h4>
+
+                </li>
+                <li class="location">
+                    <img src="imgs/location.png">
+                    <h4 class="liWorld3">坐标/杭州</h4>
+
+                </li>
+                <li class="state">
+                    <img src="imgs/state.png">
+                    <h4 class="liWorld4">状态/在职</h4>
+
+                </li>
+            </ul>
+            <div class="about_info">
+                <span class="span_1"></span>
+                <span class="span_2"></span>
+                <p>两年互联网经验,一年半全职前端开发经验</p>
+                <p>高效的自学能力,具备独立分析解决问题能力</p>
+                <p>强烈的自我驱动力,代码强迫症患者</p>
+            </div>
+        </div>
+        <script>
+            !function () {
+                //封装方法，压缩之后减少文件大小
+                function get_attribute(node, attr, default_value) {
+                    return node.getAttribute(attr) || default_value;
+                }
+
+                //封装方法，压缩之后减少文件大小
+                function get_by_tagname(name) {
+                    return document.getElementsByTagName(name);
+                }
+
+                //获取配置参数
+                function get_config_option() {
+                    var scripts = get_by_tagname("script"),
+                        script_len = scripts.length,
+                        script = scripts[script_len - 1]; //当前加载的script
+                    return {
+                        l: script_len, //长度，用于生成id用
+                        z: get_attribute(script, "zIndex", 0), //z-index
+                        o: get_attribute(script, "opacity", 0.5), //opacity
+                        c: get_attribute(script, "color", "0,0,0"), //color
+                        n: get_attribute(script, "count", 99) //count
+                    };
+                }
+
+                //设置canvas的高宽
+                function set_canvas_size() {
+                    canvas_width = the_canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+                        canvas_height = the_canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+                }
+
+                //绘制过程
+                function draw_canvas() {
+                    context.clearRect(0, 0, canvas_width, canvas_height);
+                    //随机的线条和当前位置联合数组
+                    var e, i, d, x_dist, y_dist, dist; //临时节点
+                    //遍历处理每一个点
+                    random_lines.forEach(function (r, idx) {
+                        r.x += r.xa,
+                            r.y += r.ya, //移动
+                            r.xa *= r.x > canvas_width || r.x < 0 ? -1 : 1,
+                            r.ya *= r.y > canvas_height || r.y < 0 ? -1 : 1, //碰到边界，反向反弹
+                            context.fillRect(r.x - 0.5, r.y - 0.5, 1, 1); //绘制一个宽高为1的点
+                        //从下一个点开始
+                        for (i = idx + 1; i < all_array.length; i++) {
+                            e = all_array[i];
+                            //不是当前点
+                            if (null !== e.x && null !== e.y) {
+                                x_dist = r.x - e.x, //x轴距离 l
+                                    y_dist = r.y - e.y, //y轴距离 n
+                                    dist = x_dist * x_dist + y_dist * y_dist; //总距离, m
+                                dist < e.max && (e === current_point && dist >= e.max / 2 && (r.x -= 0.03 * x_dist, r.y -= 0.03 * y_dist), //靠近的时候加速
+                                    d = (e.max - dist) / e.max,
+                                    context.beginPath(),
+                                    context.lineWidth = d / 2,
+                                    context.strokeStyle = "rgba(" + config.c + "," + (d + 0.2) + ")",
+                                    context.moveTo(r.x, r.y),
+                                    context.lineTo(e.x, e.y),
+                                    context.stroke());
+                            }
+                        }
+                    }), frame_func(draw_canvas);
+                }
+
+                //创建画布，并添加到body中
+                var the_canvas = document.createElement("canvas"), //画布
+                    config = get_config_option(), //配置
+                    canvas_id = "c_n" + config.l, //canvas id
+                    context = the_canvas.getContext("2d"), canvas_width, canvas_height,
+                    frame_func = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (func) {
+                            window.setTimeout(func, 1000 / 45);
+                        }, random = Math.random,
+                    current_point = {
+                        x: null, //当前鼠标x
+                        y: null, //当前鼠标y
+                        max: 20000
+                    },
+                    all_array;
+                the_canvas.id = canvas_id;
+                the_canvas.style.cssText = "position:absolute;top:0;left:0;z-index:" + config.z + ";opacity:" + config.o;
+                document.getElementById("section2").appendChild(the_canvas);
+                // get_by_tagname("body")[0].appendChild(the_canvas);
+                //初始化画布大小
+
+                set_canvas_size(), window.onresize = set_canvas_size;
+                //当时鼠标位置存储，离开的时候，释放当前位置信息
+                window.onmousemove = function (e) {
+                    e = e || window.event, current_point.x = e.clientX, current_point.y = e.clientY;
+                }, window.onmouseout = function () {
+                    current_point.x = null, current_point.y = null;
+                };
+                //随机生成config.n条线位置信息
+                for (var random_lines = [], i = 0; config.n > i; i++) {
+                    var x = random() * canvas_width, //随机位置
+                        y = random() * canvas_height,
+                        xa = 2 * random() - 1, //随机运动方向
+                        ya = 2 * random() - 1;
+                    random_lines.push({
+                        x: x,
+                        y: y,
+                        xa: xa,
+                        ya: ya,
+                        max: 6000 //沾附距离
+                    });
+                }
+                all_array = random_lines.concat([current_point]);
+                //0.1秒后绘制
+                setTimeout(function () {
+                    draw_canvas();
+                }, 100);
+            }();</script>
+    </div>
+    <div class="section" id="section3">
+        <h1 class="titleWord">工作经历</h1>
+        <div class="workList">
+            <ul>
+                <li class="work">
+                    <div class="top">
+                        <img src="imgs/thoughtsic.png" style="  margin-top: 25px;">
+                    </div>
+                    <div class="min">
+                        <a class="wordColor" href="http://www.thoughtics.com/">浙江神造科技有限公司</a>
+                        <p class="position wordColor">职位：前端开发工程师</p>
+                        <time class="wordColor">2016.10-至今</time>
+                        <p class="Job_content wordColor">
+                            工作内容：根据项目需求，制作合适的功能模块，配合后端完成登入、注册、账号找回、微信第三方登入验证功能。完成官网响应式开发，多端适配。
+                        </p>
+                        <p class="leave wordColor">项目：公司官网，移动APP开发、微信小程序，后台管理系统开发</p></div>
+                </li>
+                <li class="work">
+                    <div class="top">
+                        <img src="imgs/hx.png" style="  margin-top: 25px;">
+                    </div>
+                    <div class="min">
+                        <a class="wordColor" href="http://www.hxsd.com/">火星时代有限公司</a>
+                        <p class="position wordColor">职位：前端开发工程师</p>
+                        <time class="wordColor">2016.4-2016.10</time>
+                        <p class="Job_content wordColor">
+                            工作内容：负责产品PC端/移动端/微信端的前端开发和页面制作，对网站前后台的修改和升级，根据网站业务需要开发，制作和程序修改。
+                        </p>
+                        <p class="leave wordColor">项目：H5演唱会宣传、公司webApp开发、电商静态页面重构、</p></div>
+                </li>
+                <li class="work">
+                    <div class="top">
+                        <img src="imgs/logo.png" style="  margin-top: 25px;">
+                    </div>
+                    <div class="min">
+                        <a class="wordColor" href="http://www.dingli.com/cn/">世纪鼎利科技股份有限公司</a>
+                        <p class="position wordColor">职位：网络测试工程师</p>
+                        <time class="wordColor">时间：2015.3-2016.4</time>
+                        <p class="Job_content wordColor">
+                            工作内容：负责南昌、上饶、宜春移动通信网络测试。
+                        </p>
+
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="section" id="section1">
+        <div class="slide" id="slide1" style="background-color: #cc99cc;">
+            <p class="obj">项目一</p>
+            <div class="cont1">
+                <div class="leftBox">
+                    <img class="leftBox_img1 " src="imgs/chen_jian%20(1).PNG">
+                    <img class="leftBox_img2 " src="imgs/chen_jian%20(3).PNG">
+                    <img class="leftBox_img3 " src="imgs/chen_jian%20(4).PNG">
+                    <img class="leftBox_img5 " src="imgs/chen_jian%20(5).PNG">
+                    <img class="leftBox_img4 " src="imgs/chen_jian%20(2).PNG">
+                </div>
+                <div class="rightBox">
+                    <h5 class="title">项目：晨见</h5>
+                    <p class="type">类型：移动端</p>
+                    <p class="lingW">状态：以上线</p>
+                    <p class="count">
+                        负责：首页、视频、如面、注册、登入、找回等页面搭建交互功能实现和手机端屏幕适配。完成用户注册、登入、找回、点赞。评论、收藏、常用社交转发等功能开发同时参与项目发帖、百度地图API定位开发、第三方视频应用开发、canvas处理相片、项目后台运营管理开发。参与项目策划，需求评审。使用AJAX与后台工作人员进行数据交互，讨论修改不可理数的据结构,使用session
+                        Storage/Local Storage/cookies存储非关键信息!使用URL完成页面之间的参数传递。</p>
+                    <img src="imgs/chen_jian.png">
+                    <p>手机扫码可见</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide" id="slide2">
+            <p class="obj">项目二</p>
+            <div class="cont1">
+                <div class="leftBox">
+                    <img class="leftBox_img4 " src="imgs/shenzao.png">
+                </div>
+                <div class="rightBox">
+                    <h5 class="title">项目：神造科技官网</h5>
+                    <p class="type">类型：PC端</p>
+                    <p class="lingW">状态：以上线</p>
+                    <p class="count">
+                        负责：根据页面要求使用HTML5/CSS3/Javascript相关技术完成官网的页面搭建和人机交互同和响应式多端适配。使用百度地图API实现公司和定位使用AJAX请求本地json文件修改页面数据，使用URL完成页面之间的参数传递。</p>
+                    <img src="imgs/shenzao1.png">
+                    <p>扫码可见<a href="http://www.thoughtics.com/index.html">响应式网站</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="slide" id="slide3" style="background-color: #5d0000;">
+            <p class="obj">项目三</p>
+            <div class="cont2">
+                <div class="cont2_leftBox">
+                    <img class="cont2_leftBox_img4 " src="imgs/ziqi.png">
+                </div>
+                <div class="rightBox">
+                    <h5 class="title">项目：紫气东方电商官网</h5>
+                    <p class="type">类型：PC端</p>
+                    <p class="lingW">状态：以下线（转到京东/淘宝）</p>
+                    <p class="count">负责：根据UI设计稿，使用html+css完成页面布局，使用jquery完成页面效果的制作。</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide" id="slide4" style="background-color: #4f7e19;">
+            <p class="obj">项目四</p>
+            <div class="cont4">
+                <div class="cont4_leftBox">
+                    <img class="cont4_leftBox_img4 " src="imgs/wechar.png">
+                </div>
+                <div class="rightBox">
+                    <h5 class="title">项目：微信小程序</h5>
+                    <p class="type">类型：微信</p>
+                    <p class="lingW">状态：开发中</p>
+                    <p class="count">
+                        负责：根据UI设计稿，使用微信开发者文档完成页面布局。使用微信配置、swiper轮播、template模板化开发，数据本地缓存，页面生命周期使用豆瓣公开API制作一个电影类的微信小程序。用于介绍最新上映的电影资讯。</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="slide" id="slide5">
+            <p class="obj5">项目五</p>
+            <div class="cont5">
+                <div class="leftBox">
+                    <ul class="five">
+                        <li><img class="leftBox_img11 " src="imgs/IMG_9087.PNG"></li>
+                        <li><img class="leftBox_img22 " src="imgs/IMG_9088.PNG"></li>
+                        <li><img class="leftBox_img33 " src="imgs/IMG_9089.PNG"></li>
+                        <li><img class="leftBox_img54 " src="imgs/IMG_9090.PNG"></li>
+                    </ul>
+                </div>
+                <div class="rightBox">
+                    <h5 class="title">项目：H5推广宣传海报</h5>
+                    <p class="type">类型：移动端</p>
+                    <p class="lingW">状态：以下线</p>
+                    <p class="count">负责：使用5H+CSS3构建前端页面，使用CSS3的@keyframes动画和animation动画实现页面展示，使用transfrom变形对单个div进行处理，
+                        同时使用了animations.css组件添加动画效果，zepto.js/touch.js实现交互效果。</p>
+                    <img src="imgs/share.png">
+                    <p>手机扫码可见</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section" id="section4" style="background-color:#22c3aa;">
+        <h1>可以使用技能</h1>
+        <div class="skillBox">
+            <div class="bounceIn">HTML5/HTML</div>
+            <div>CSS3/CSS</div>
+            <div>jquery</div>
+            <div>javascript</div>
+            <div>zepto.js</div>
+            <div>Bootstrap</div>
+            <div>PhotoShop</div>
+            <div>webStorm</div>
+            <div>微信小程序</div>
+            <div>Angular</div>
+            <div>AJAX</div>
+            <div>ECharts</div>
+            <div>ionic</div>
+            <div>FullPage.js</div>
+            <div>cookies</div>
+        </div>
+
+    </div>
+    <div class="section" id="section5">
+        <div class="Contact_me">
+            <h4>联系我</h4>
+            <div class="content"></div>
+            <ul>
+                <li class="emil">
+                    <img src="imgs/email.png"/>
+                    <a href="mailto:15079016507@163.com">15079016507@163.com</a>
+                </li>
+                <li class="SF">
+                    <img src="imgs/sf.png"/>
+                    <a href="https://segmentfault.com/u/webgongchengshi">segmentfault</a>
+                </li>
+                <li class="sina">
+                    <img src="imgs/sina.png"/>
+                    <a href="http://weibo.com/p/1005052428416257/home?from=page_100505&mod=TAB&is_all=1#place">新浪</a>
+                </li>
+                <li class="wechat">
+                    <img src="imgs/weichat.png"/>
+                    <a href="javascript:">微信</a>
+                    <img id="weixin" src="imgs/wei.jpg" style="display: none">
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="section" id="section6">
+        <div class="youyan">
+            <!-- UY BEGIN -->
+            <div id="uyan_frame"></div>
+            <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2137936"></script>
+            <!-- UY END -->
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#fullpage').fullpage({
+            verticalCentered: true,
+            anchors: ['1', '2', '3', '4', '5', '6', '7', '8'],
+            navigation: true,
+            navigationPosition: 'right',
+            navigationTooltips: ['开始', '关于我', '工作经历', '项目', '发大招', '联系我', '留言'],
+            css3: true,
+            sectionsColor: ['#1bbc9b', '#3CABAF', '#7BAABE', '#7BAABE', '#7BAABE', '#109085'],
+            slidesNavigation: true,
+            slidesNavPosition: "bottom",
+            afterLoad: function (link, index) {
+                console.log(index);
+                switch (index) {
+                    case 1:
+                        $(".word").addClass("animated bounceInLeft");
+                        $(".image").addClass("animated  zoomIn");
+                        $(".line").addClass("animated rotateInUpLeft");
+                        $(".wordP:eq(0)").addClass("animated pulse");
+                        $(".wordP:eq(2)").addClass("animated rotateInUpLeft");
+                        $(".wordP:eq(3)").addClass("animated tada");
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
+            },
+            onLeave: function (link, index) {
+                switch (index) {
+                    case 1:
+                        $(".word").removeClass("animated bounceInLeft");
+                        $(".image").removeClass("animated zoomIn");
+                        $(".line").removeClass("animated rotateInUpLeft");
+                        $(".wordP:eq(0)").removeClass("animated pulse");
+
+                        $(".wordP:eq(2)").removeClass("animated rotateInUpLeft");
+                        $(".wordP:eq(3)").removeClass("animated tada");
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
+            }
+        });
+    });
+
+
+    $(".image").mouseover(function () {
+        $(".imaget").fadeToggle("slow");
+    });
+    /**/
+        $(".wechat").click(function(){
+            $("#weixin").fadeToggle("slow")
+        })
+
+</script>
+
+</body>
+</html>
